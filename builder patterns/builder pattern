@@ -1,0 +1,142 @@
+<?php
+
+interface car_builder_interface{
+/**طريقة عمل العربية  */
+    public function addEnginee();
+    public function addDoors();
+    public function addMeel();
+    public function createCar();
+    public function getCar():car_;
+    public function addBody();
+
+}
+
+
+
+class car_ {
+    public function setparts($name, $value){
+
+    }
+
+    public function sayHello(){
+        echo"hehhp function in car class <br>";
+    }
+
+
+}
+
+class BMWcar_ extends car_{
+    private $data=[];
+    public function setparts($name, $value){
+        $this->data[$name]=$value;
+
+         
+    }
+
+}
+class MARCEDScar_  extends car_ {
+    private $data=[];
+    public function setparts($name, $value){
+        $this->data[$name]=$value;
+
+         
+    }  
+
+}
+
+
+class BMW_car_Bulider implements car_builder_interface{
+
+    private $type;
+
+    public function addEnginee(){
+        $this->type->setparts('name','zayedenginee');
+
+
+    }
+    public function addDoors(){
+        $this->type->setparts('name', 'zayeddoors');
+
+
+    }
+    public function addMeel(){
+        $this->type->setparts('name', 'zayedmeel');
+
+
+    }
+    public function createCar(){
+        $type=new BMWcar_();
+
+    }
+    public function getCar():BMWcar_{
+        return $this->type;
+
+    }
+    public function addBody(){
+        $this->type->setparts('name', 'zayed');
+
+
+    }
+
+}
+class MARCEDS_car_Bulider implements car_builder_interface{
+    private $type;
+    public function addEnginee(){
+        $this->type->setparts('name','midoenginee');
+
+
+    }
+    public function addDoors(){
+        $this->type->setparts('name','midodoors');
+
+
+    }
+    public function addMeel(){
+        $this->type->setparts('name','midomeel');
+
+
+    }
+    public function createCar(){
+
+       $this->type =new MARCEDScar_();
+
+    }
+    public function getCar():MARCEDScar_{
+        return $this->type;
+
+    }
+    public function addBody(){
+        $this->type->setparts('name','midobody');
+
+
+    }
+
+
+}
+
+/**/
+
+class carproducer{
+    private $builders;
+    public function __construct(car_builder_interface $builders){
+        $this->builders = $builders;
+    
+    
+    }
+    public function produceCar():car_{
+         $this->builders->createCar();
+         $this->builders->addBody();
+         $this->builders->addDoors();
+         $this->builders->addEnginee();
+         $this->builders->addMeel();
+        return $this->builders->getCar(); 
+
+    }
+}
+
+$A=new MARCEDS_car_Bulider();
+$car1=new carproducer($A);
+$B= $car1->produceCar();
+$B->sayHello();
+
+?>
