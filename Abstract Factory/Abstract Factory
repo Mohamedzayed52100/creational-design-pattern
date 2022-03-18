@@ -1,0 +1,79 @@
+<?php
+
+
+
+interface car{
+    public function calculatePrice();
+
+}
+
+
+
+
+class BMWcar implements  car{
+
+
+    private $price;
+
+    public function __construct($price){
+        $this->price = $price;
+    }
+
+    public function calculatePrice(){
+
+        return $this->price*60;
+
+
+    }
+
+}
+class Benzcar implements car{
+    private $price;
+    private $tax;/* الضرائب */
+
+    public function __construct($price , $tax){
+        $this->price = $price;
+        $this->tax = $tax;
+    }
+
+    public function calculatePrice(){
+        return $this->price * $this->tax+22000;
+
+    }
+
+}
+
+
+
+
+/* كدا هيتعامل مع الكلاس ده بس مش مع الكلاسات اللي فوق */
+class carAbstractFactory{
+    private $tax=100000;
+    private $price=10100;
+
+    public function __construct( $price, $tax){
+        $this->price=$price;
+        $this->tax=$tax;
+
+    }
+    public function create_BMW_car():BMWcar{
+     return new  BMWcar($this->price);
+    }
+    public function create_BENZ_car():Benzcar{
+     return new  Benzcar($this->price, $this->tax);
+    }
+
+}
+
+
+$car=new carAbstractFactory(10000, 200);
+
+$A= $car->create_BMW_car();
+echo $A->calculatePrice();
+echo "<br>";
+$B= $car->create_BENZ_car();
+echo $B->calculatePrice();
+
+
+
+?>
