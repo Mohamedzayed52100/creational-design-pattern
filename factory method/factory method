@@ -1,0 +1,54 @@
+<?php
+
+interface car_brand_interface {
+
+    public function createBrand();
+
+}
+class BMWBRand implements car_brand_interface{
+
+
+    public function createBrand(){
+        return 'bmw brand';
+    }
+
+
+}
+class BenZbrand implements car_brand_interface{
+    public  function createBrand(){
+        return 'BenZ brand';
+    }
+
+}
+
+
+interface brandFactory{
+
+    public function buildBrand();
+
+
+}
+class bmwbrandFactory implements brandFactory{
+    public function buildBrand(){
+        return new bmwbrand();
+
+    }
+}
+class BenZbrandfactory implements brandFactory{
+    public function buildBrand(){
+        return new BenZbrand();
+
+    }
+
+ }
+
+ $a=new bmwbrandFactory();
+ $my= $a->buildBrand();
+ echo $my->createBrand();
+
+echo "<br>";
+ $a=new benzbrandFactory();
+ $my= $a->buildBrand();
+ echo $my->createBrand();
+
+?>
